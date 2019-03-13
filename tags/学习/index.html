@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>马福亮的博客</title>
+  <title>Tag: 学习 | 马福亮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="马福亮的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/学习/index.html">
 <meta property="og:site_name" content="马福亮的博客">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
@@ -140,53 +140,34 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Java基础篇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/03/13/Java基础篇/" class="archive-article-date">
+  	<time datetime="2019-03-13T14:56:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-13</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/13/Java基础篇/">Java基础篇</a>
+      <a class="archive-article-title" href="/2019/03/13/Java基础篇/">Java基础篇</a>
     </h1>
   
 
-        
-        <a href="/2019/03/13/Java基础篇/" class="archive-article-date">
-  	<time datetime="2019-03-13T14:56:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、数据类型"><a href="#一、数据类型" class="headerlink" title="一、数据类型"></a>一、数据类型</h2><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><ol>
-<li><p>byte/8、char/16、short/16、int/32、float/32、long/64、double/64、boolean</p>
-<p>boolean只有两个值（true/false），可以使用1bit来存储，但是通常没有明确规定大小。JVM会在编译时期将boolean类型的数据转换为int,使用1来表示true,0来表示false。JVM并不直接支持boolean数组，而是使用byte数组来表示int数组。</p>
-</li>
-</ol>
-<h3 id="包装类型"><a href="#包装类型" class="headerlink" title="包装类型"></a>包装类型</h3><p>​    1.目的：提供一种机制，将基本值“包装”到对象中，从而使基本值能够包含在为对象而保留的操作中，比如添加到Collections中，或者从带对象返回值的方法中返回;为基本值提供分类功能，这些功能大多数与各种转换有关，在基本值和String对象间相互转换，在基本值和String对象之间按不同基数转换，如二进制。注意，Java5增加了自动装箱和拆箱，不需要程序员手动执行。</p>
-<p>​    2.以下代码编写时不会报错，编译时会报空指针异常，装箱过程是通过调用包装器的valueOf方法，而拆箱是调用包装器的xxxValue方法实现的（xxx代表对应的基本数据类型）。当两个包装类型的数据进行运算时会触发自动拆箱，equals方法不会触发类型转换，==表示判断是否指向同一个对象。对于整型包装对象，如果数值在-128～127（缓存池）之间时，使用new方法时会返回同一个对象，而浮点型不会</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer test = <span class="keyword">null</span>;</span><br><span class="line">   <span class="keyword">int</span> f = test.intValue();</span><br></pre></td></tr></table></figure>
-<h3 id="二、String"><a href="#二、String" class="headerlink" title="二、String"></a>二、String</h3><ol>
-<li><p>String被声明为final,因此不可被继承。在Java 8中，String内部使用char数组来存储数据，在Java 9之后，改用byte数组来存储字符串，同时使用coder来标识使用了哪种编码。value数组被声明为final,这意味着value数组初始化之后就不能再引用其他数组。并且String内部没有改变value数组的方法，因此保证了String不可变。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span></span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span>, <span class="title">Comparable</span>&lt;<span class="title">String</span>&gt;, <span class="title">CharSequence</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** The value is used for character storage. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">byte</span>[] value;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** The identifier of the encoding used to encode the bytes in &#123;<span class="doctag">@code</span> value&#125;. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">byte</span> coder;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>不可变的好处：可以缓存hash值，因为String的hash值经常被使用，例如使用String用作HashMap的key,不可变性可以使得hash值也不可变，因此只需要进行一次计算;String Pool的需要，如果一个String对象被创建过了，那么就会从String pool中取得引用，只有String是不可变的，才可以使用String Pool;安全性，String经常作为参数，String不可变性可以保证参数不可变，例如在作为网络连接参数的情况下如果String是可变的，那么在网络连接过程中，String被改变，改变String对象的那一方以为现在连接的是其它主机，而实际情况不一定是;线程安全，String不可变性天生具备线程安全，可以在多个线程中安全使用</p>
-</li>
-<li><p>String Pool（字符串常量池）保存着所有字符串字面量（literal strings），这些字面量在编译时期就确定。不仅如此，还可以使用String的intern方法在运行过程中将字符串添加到String Pool中。当一个字符串调用intern方法时，如果String Pool中已经存在一个字符串和该字符串值相等（使用equals方法进行确定），那么就会返回Striing Pool中字符串的引用;否则，就会在String Pool中添加一个新的字符串，并返回这个新的字符串的引用。在Java 7之前，String Pool被放在运行常量池中，属于永久代，而在Java 7,String Pool被移到堆中。这是因为永久代的空间有限，在大量使用字符串的场景下会导致OutOfMemoryError错误。</p>
-</li>
-<li><p>new String(“abc”),使用这种方式会创建两个字符串对象（前提是String Pool中还没有“abc”字符串对象）。“abc”属于字符串字面量，因此编译时期会在String Pool中创建一个字符串对象，只想这个“abc”字符串字面量;而使用new方法会在堆中创建一个字符串对象。</p>
-</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -198,116 +179,19 @@
 		</ul>
 	</div>
 
-      
+          
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/13/Java基础篇/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-我的第一篇博客文章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/13/我的第一篇博客文章/">我的第一篇博客文章</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/13/我的第一篇博客文章/" class="archive-article-date">
-  	<time datetime="2019-03-13T10:40:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>第一篇博客，开启了新的感觉，这里是我的一个人小小的角落。在这里分享生活，分享学习途中的问题和心得。</p>
-<p>请大家听歌，这首歌真是怎么听怎么有味道 </p>
-<iframe src="https://open.spotify.com/embed/track/53r67Uo7RkvuczvlWcvaac" width="large" height="undefined" frameborder="0" allowtransparency="allowtransparency" allow="encrypted-media"></iframe>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/13/我的第一篇博客文章/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
 
 
           </div>
@@ -329,10 +213,10 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
