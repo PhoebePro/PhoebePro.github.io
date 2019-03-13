@@ -43,7 +43,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="http://meisupic.oss-cn-beijing.aliyuncs.com/thumbs/1000504/135300480/api_thumb_450.jpg" class="js-avatar">
+			<img src="http://meisupic.oss-cn-beijing.aliyuncs.com/thumbs/1852855/38519037/api_thumb_450.jpg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">马福亮</a></h1>
@@ -89,7 +89,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="http://meisupic.oss-cn-beijing.aliyuncs.com/thumbs/1000504/135300480/api_thumb_450.jpg" class="js-avatar">
+				<img src="http://meisupic.oss-cn-beijing.aliyuncs.com/thumbs/1852855/38519037/api_thumb_450.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">马福亮</h1>
@@ -152,21 +152,21 @@
       
         <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=5041667&auto=0&height=66"></iframe>
 
-<h2 id="一、数据类型"><a href="#一、数据类型" class="headerlink" title="一、数据类型"></a>一、数据类型</h2><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><ol>
+<h2 id="一、数据类型"><a href="#一、数据类型" class="headerlink" title="一、数据类型"></a>一、数据类型</h2><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><ul>
 <li><p>byte/8、char/16、short/16、int/32、float/32、long/64、double/64、boolean</p>
-<p>boolean只有两个值（true/false），可以使用1bit来存储，但是通常没有明确规定大小。JVM会在编译时期将boolean类型的数据转换为int,使用1来表示true,0来表示false。JVM并不直接支持boolean数组，而是使用byte数组来表示int数组。</p>
+<p> boolean只有两个值（true/false），可以使用1bit来存储，但是通常没有明确规定大小。JVM会在编译时期将boolean类型的数据转换为int,使用1来表示true,0来表示false。JVM并不直接支持boolean数组，而是使用byte数组来表示int数组。</p>
 </li>
-</ol>
-<h3 id="包装类型"><a href="#包装类型" class="headerlink" title="包装类型"></a>包装类型</h3><ol>
+</ul>
+<h3 id="包装类型"><a href="#包装类型" class="headerlink" title="包装类型"></a>包装类型</h3><ul>
 <li><p>目的：提供一种机制，将基本值“包装”到对象中，从而使基本值能够包含在为对象而保留的操作中，比如添加到Collections中，或者从带对象返回值的方法中返回;为基本值提供分类功能，这些功能大多数与各种转换有关，在基本值和String对象间相互转换，在基本值和String对象之间按不同基数转换，如二进制。注意，Java5增加了自动装箱和拆箱，不需要程序员手动执行。</p>
 </li>
 <li><p>以下代码编写时不会报错，编译时会报空指针异常，装箱过程是通过调用包装器的valueOf方法，而拆箱是调用包装器的xxxValue方法实现的（xxx代表对应的基本数据类型）。当两个包装类型的数据进行运算时会触发自动拆箱，equals方法不会触发类型转换，==表示判断是否指向同一个对象。对于整型包装对象，如果数值在-128～127（缓存池）之间时，使用new方法时会返回同一个对象，而浮点型不会</p>
 </li>
-</ol>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer test = <span class="keyword">null</span>;</span><br><span class="line">   <span class="keyword">int</span> f = test.intValue();</span><br></pre></td></tr></table></figure>
-<h3 id="二、String"><a href="#二、String" class="headerlink" title="二、String"></a>二、String</h3><ol>
+<h3 id="二、String"><a href="#二、String" class="headerlink" title="二、String"></a>二、String</h3><ul>
 <li><p>String被声明为final,因此不可被继承。在Java 8中，String内部使用char数组来存储数据，在Java 9之后，改用byte数组来存储字符串，同时使用coder来标识使用了哪种编码。value数组被声明为final,这意味着value数组初始化之后就不能再引用其他数组。并且String内部没有改变value数组的方法，因此保证了String不可变。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span></span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span>, <span class="title">Comparable</span>&lt;<span class="title">String</span>&gt;, <span class="title">CharSequence</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** The value is used for character storage. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">byte</span>[] value;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** The identifier of the encoding used to encode the bytes in &#123;<span class="doctag">@code</span> value&#125;. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">byte</span> coder;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span></span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span>, <span class="title">Comparable</span>&lt;<span class="title">String</span>&gt;, <span class="title">CharSequence</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** The value is used for character storage. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">byte</span>[] value;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** The identifier of the encoding used to encode the bytes in &#123;<span class="doctag">@code</span> value&#125;. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">byte</span> coder;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>不可变的好处：可以缓存hash值，因为String的hash值经常被使用，例如使用String用作HashMap的key,不可变性可以使得hash值也不可变，因此只需要进行一次计算;String Pool的需要，如果一个String对象被创建过了，那么就会从String pool中取得引用，只有String是不可变的，才可以使用String Pool;安全性，String经常作为参数，String不可变性可以保证参数不可变，例如在作为网络连接参数的情况下如果String是可变的，那么在网络连接过程中，String被改变，改变String对象的那一方以为现在连接的是其它主机，而实际情况不一定是;线程安全，String不可变性天生具备线程安全，可以在多个线程中安全使用</p>
 </li>
@@ -174,7 +174,7 @@
 </li>
 <li><p>new String(“abc”),使用这种方式会创建两个字符串对象（前提是String Pool中还没有“abc”字符串对象）。“abc”属于字符串字面量，因此编译时期会在String Pool中创建一个字符串对象，只想这个“abc”字符串字面量;而使用new方法会在堆中创建一个字符串对象。</p>
 </li>
-</ol>
+</ul>
 
       
 
