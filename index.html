@@ -152,11 +152,11 @@
       
         <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=5041667&auto=0&height=66"></iframe>
 
-<h2 id="一、数据类型"><a href="#一、数据类型" class="headerlink" title="一、数据类型"></a>一、数据类型</h2><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><ul>
+<h2 id="一、数据类型"><a href="#一、数据类型" class="headerlink" title="一、数据类型"></a>一、数据类型</h2><h4 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h4><ul>
 <li>byte/8、char/16、short/16、int/32、float/32、long/64、double/64、boolean</li>
 <li>boolean只有两个值（true/false），可以使用1bit来存储，但是通常没有明确规定大小。JVM会在编译时期将boolean类型的数据转换为int,使用1来表示true,0来表示false。JVM并不直接支持boolean数组，而是使用byte数组来表示int数组。</li>
 </ul>
-<h3 id="包装类型"><a href="#包装类型" class="headerlink" title="包装类型"></a>包装类型</h3><ul>
+<h4 id="包装类型"><a href="#包装类型" class="headerlink" title="包装类型"></a>包装类型</h4><ul>
 <li><p>目的：提供一种机制，将基本值“包装”到对象中，从而使基本值能够包含在为对象而保留的操作中，比如添加到Collections中，或者从带对象返回值的方法中返回;为基本值提供分类功能，这些功能大多数与各种转换有关，在基本值和String对象间相互转换，在基本值和String对象之间按不同基数转换，如二进制。注意，Java5增加了自动装箱和拆箱，不需要程序员手动执行。</p>
 </li>
 <li><p>以下代码编写时不会报错，编译时会报空指针异常，装箱过程是通过调用包装器的valueOf方法，而拆箱是调用包装器的xxxValue方法实现的（xxx代表对应的基本数据类型）。当两个包装类型的数据进行运算时会触发自动拆箱，equals方法不会触发类型转换，==表示判断是否指向同一个对象。对于整型包装对象，如果数值在-128～127（缓存池）之间时，使用new方法时会返回同一个对象，而浮点型不会</p>
@@ -173,6 +173,108 @@
 </li>
 <li><p>new String(“abc”),使用这种方式会创建两个字符串对象（前提是String Pool中还没有“abc”字符串对象）。“abc”属于字符串字面量，因此编译时期会在String Pool中创建一个字符串对象，只想这个“abc”字符串字面量;而使用new方法会在堆中创建一个字符串对象。</p>
 </li>
+</ul>
+<h3 id="三、继承"><a href="#三、继承" class="headerlink" title="三、继承"></a>三、继承</h3><h4 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h4><p>抽象类和抽象方法都使用abstract关键字来声明，抽象类一般会包含抽象方法，抽象方法一定位于抽象类中。抽象类和普通类最大的区别就是抽象类不能被实例化，需要继承抽象类才能实例化其子类，例如容器类。</p>
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><p>接口是抽象类的延伸，在Java 8之前，接口不能有任何实现方法。从Java 8开始，借口也可以拥有默认的方法实现，这是因为不支持默认方法的借口维护成本太高了，在Java 8之前，如果想要一个接口想要添加新的方法，那么要修改所有实现了该接口的类。接口的成员（字段+方法）默认都是public的，并且不允许定义为private或者protected。借口的字段默认都是static和final的。</p>
+<h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><p>从设计层面上看，抽象类提供了一种IS-A关系，那么就必须满足里氏替换原则，即子类对象必须能够替换掉所有父类对象。而借口更像是一种LIKE-A关系，它只是提供了一种方法实现契约，并不要求接口和实现接口的类具有IS-A关系。</p>
+<p>从使用上来看，一个类可以实现多个借口，但不能继承多个抽象类。</p>
+<p>接口的字段只能是static和final类型的，而抽象类的字段没有这种限制。</p>
+<p>接口的成员只能是public的，而抽象类的成员可以有多种访问权限。</p>
+<h4 id="使用选择"><a href="#使用选择" class="headerlink" title="使用选择"></a>使用选择</h4><p>使用接口：</p>
+<ul>
+<li>需要让不相关的类实现一个方法，例如不相关的类都可以实现Compareable接口中的compareTo()方法;</li>
+<li>需要使用多重继承</li>
+</ul>
+<p>使用抽象类：</p>
+<ul>
+<li>需要在几个相关的类中共享代码。</li>
+<li>需要能控制继承来的成员的访问权限，而不是都为public。</li>
+<li>需要继承非静态和非常量字段。</li>
+</ul>
+<p>在很多情况下，接口优先于抽象类。因为接口没有抽象类严格的类层次结构要求，可以灵活地为一个类添加行为。并且从Java 8开始，借口也可以有默认的方法实现，使得修改接口的成本也变的很低。</p>
+<h4 id="super"><a href="#super" class="headerlink" title="super"></a>super</h4><ul>
+<li>f访问父类的构造函数：可以使用super()函数访问父类的构造函数，从而委托父类完成一些初始化的工作。</li>
+<li>访问父类的成员：如果子类重写了父类的某个方法，可以通过使用super关键字来引用父类的方法实现。</li>
+</ul>
+<h4 id="重写与重载"><a href="#重写与重载" class="headerlink" title="重写与重载"></a>重写与重载</h4><h5 id="1-重写"><a href="#1-重写" class="headerlink" title="1.重写"></a>1.重写</h5><p>存在于继承体系中，指子类实现了一个与父类在方法声明上完全相同的一个方法。</p>
+<p>为了满足里氏替换原则，重写有以下限制：</p>
+<ul>
+<li>子类方法的访问权限必须大于等于父类方法;</li>
+<li>子类方法的返回类型必须是父类方法返回类型或为其子类型。</li>
+</ul>
+<p>使用@Override注解，可以让编译器帮忙检查是否满足以上两个限制条</p>
+<h5 id="2-重载"><a href="#2-重载" class="headerlink" title="2.重载"></a>2.重载</h5><p>存在于同一个类中，指一个方法与已经存在的方法名称上相同，但是参数类型、个数、顺序至少有一个不同。</p>
+<p>应该注意的是，返回值不同，其他都相同不算是重载。</p>
+<h2 id="四、Object通用方法"><a href="#四、Object通用方法" class="headerlink" title="四、Object通用方法"></a>四、Object通用方法</h2><p>hashCode()、equals()、clone()、toString()、getClass()、finalize()、notify()、notifyAll()、wait()</p>
+<ul>
+<li><h4 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h4></li>
+</ul>
+<ol>
+<li>自反性</li>
+<li>对称性</li>
+<li>传递性</li>
+<li>一致性</li>
+<li>与null的比较，对任何不是null的对象调用equals()结果都是false</li>
+<li>等价与相等：对于基本类型，==判断两个值是否相等，基本类型没有equals方法，对于引用类型，==判断两个变量是否引用同一个对象，而equals段盘引用的对象是否等价。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Integer x = <span class="keyword">new</span> Integer(<span class="number">1</span>);</span><br><span class="line">Integer y = <span class="keyword">new</span> Integer(<span class="number">1</span>);</span><br><span class="line">System.out.println(x.equals(y)); <span class="comment">// true</span></span><br><span class="line">System.out.println(x == y);      <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><h4 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode()"></a>hashCode()</h4></li>
+</ul>
+<p>hashCode()返回散列值，而equals()是用来判断两个对象是否相等，等价的两个对象昂散列值一定相同，但两个散列值相同的对象不一定等价。在覆盖equals()方法时应当总是覆盖hashCode()方法，保证等价的两个对象散列值也想等。理想的散列函数应当具有均匀性，即不想等的对象应当均匀分布到所有可能的散列值上。这就要求了散列值函数要把所有域的值都考虑进来。可以将每个域都当成R进制的某一位，然后组成一个R进制的整数。R一般取31,因为它是一个奇素数，如果是偶数的花，当出现乘法溢出，信息就会丢失，因为与2想乘相当于左移一位。一个数与31想乘可以转换成移位和减法：31*x == (x&lt;&lt;5)-x,编译器会自动进行这个优化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result = <span class="number">17</span>;</span><br><span class="line">    result = <span class="number">31</span> * result + x;</span><br><span class="line">    result = <span class="number">31</span> * result + y;</span><br><span class="line">    result = <span class="number">31</span> * result + z;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="五、关键字"><a href="#五、关键字" class="headerlink" title="五、关键字"></a>五、关键字</h2><h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><p><strong>数据</strong>声明数据为常量，可以是编译时常量，也可以是运行时被初始化后不能被改变的常量。</p>
+<ul>
+<li>对于基本类型，final是数值不变</li>
+<li>对于引用类型，final是引用不变，也就是不能引用其他对象，但是被引用的对象本身是可以被修改的。</li>
+</ul>
+<p><strong>方法</strong></p>
+<p>声明方法不能被子类重写。</p>
+<p>private方法隐式地被指定为final,如果在子类中定义的方法和基类中的一个private方法签名相同，此时子类的方法不是重写基类方法，而是在子类中定义了一个新的方法。</p>
+<p><strong>类</strong></p>
+<p>声明类不允许被继承。</p>
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p><strong>静态变量</strong></p>
+<ul>
+<li>静态变量：又称为类变量，也就是说这个变量是属于类的，类所有的实例都共享静态变量，可以直接通过类型来访问它，静态变量在内存中只存在一份。</li>
+<li>实例变量：没创建一个实例就会产生一个实例变量，它与该实例生命周期一样</li>
+</ul>
+<p><strong>静态方法</strong></p>
+<p>静态方法在类加载的时候就存在了，它不依赖于任何实例。所以静态方法必须有实现，也就是说它不能是抽象方法。只能访问所属类的静态字段和静态方法，方法中不能有this和super关键字。</p>
+<p><strong>静态语句块</strong></p>
+<p><u>静态语句块在类初始化时运行一次</u></p>
+<p><strong>静态内部类</strong></p>
+<p>非静态内部类依赖于外部类的实例，而静态内部类不需要，静态内部类不能访问外部类的非静态的变量和方法。</p>
+<p><strong>静态导包</strong></p>
+<p>在使用静态变量和方法时不用再知名ClassName,从而简化代码，但可读性大大降低。</p>
+<p><strong>初始化顺序</strong></p>
+<p>静态变量和静态语句块优先于实例变量和普通语句块，静态变量和静态语句块的初始化顺序取决于它们在代码中的顺序。存在继承的情况下，初始化顺序为：</p>
+<ul>
+<li>父类（静态变量、静态语句块）</li>
+<li>子类（静态变量、静态语句块）</li>
+<li>父类（实例变量、普通语句块）</li>
+<li>父类（构造函数）</li>
+<li>子类（实例变量、普通语句块）</li>
+<li>子类（构造函数）</li>
+</ul>
+<h2 id="七、反射"><a href="#七、反射" class="headerlink" title="七、反射"></a>七、反射</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Reflection enables Java code to discover information about the fields, methods and constructors of loaded classes, and to use reflected fields, methods, and constructors to operate on their underlying counterparts, within security restrictions.</span><br><span class="line">The API accommodates applications that need access to either the public members of a target object (based on its runtime class) or the members declared by a given class. It also allows programs to suppress default reflective access control.</span><br></pre></td></tr></table></figure>
+<p>每个类都有一个Class对象，包含了与类有关的信息。当编译一个新类时，会产生一个同名的.class文件，该文件内容保存着Class对象。</p>
+<p>类加载相当于Class对象的加载，类在第一次使用时才动态加载到JVM中。也可以使用Class.forName(“com.mysql.jdbc.Driver”)这种方式在控制类的加载，该方法会返回一个Class对象。反射可以提供运行时的类信息，并且这个类可以在运行时才加载进来，甚至在编译时期该类的.class不存在也可以加载进来。</p>
+<p>Class和java.lang.reflect一起对反射提供了支持，java.lang.reflect类库包含了一下三个类</p>
+<ul>
+<li>Field：可以使用get()和set()方法读取和修改Field怼兮那个关联的字段;</li>
+<li>Method：可以使用invoke()方法调用与Method对象关联的方法;</li>
+<li>Constructor：可以用Constructor来创建新的对象。</li>
+</ul>
+<h4 id="反射的优点："><a href="#反射的优点：" class="headerlink" title="反射的优点："></a>反射的优点：</h4><ul>
+<li><strong>可拓展性：</strong>应用程序可以利用全限定名创建可拓展对象的实例，来使用来自外部的用户自定义类。</li>
+<li><strong>类浏览器和可视化开发环境：</strong>一个类浏览器需要可以枚举类的成员。可视化开发环境（如IDE）可以从利用反射中可用的类型信息中受益，以帮助程序员编写正确的代码。</li>
+<li><strong>调试器和测试工具：</strong>调试器需要能够检查一类的私有成员。测试工具可以利用反射来自动调用类里定义的可被发现的API定义，以确保一组测试中有较高的代码覆盖率。</li>
+</ul>
+<h4 id="反射的确定："><a href="#反射的确定：" class="headerlink" title="反射的确定："></a>反射的确定：</h4><p>尽管反射非常强大，但也不能滥用。如果一个功能可以不用反射完成，那么最好就不用。在我们使用反射技术时，下面几条内容应该牢记于心。</p>
+<ul>
+<li><strong>性能开销：</strong>反射涉及了动态类型的解析，所以JVM无法对这些代码进行优化。因此，反射操作的效率要比非反射类操作低得多，我们应该避免在经常被执行的代码或对其性呢个要求很高的程序中使用反射。</li>
+<li><strong>安全限制：</strong>使用反射技术要求程序必须在一个没有安全限制的环境中运行。如果一个程序必须在有安全限制的环境中运行，如Applet,那么这就是个问题了。</li>
+<li><strong>内部暴露：</strong>由于反射允许代码执行一些正常情况不被允许的操作（比如访问私有的属性和方法），所以使用反射可能会导致意料之外的副作用，这可能导致代码功能失调并破坏可移植性。反射代码破坏了抽象性，因此当平台发生改变的时候，代码的行为就有可能也随着变化。</li>
 </ul>
 
       
@@ -387,11 +489,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">生活</a>
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
             
             <div class="clearfix"></div>
