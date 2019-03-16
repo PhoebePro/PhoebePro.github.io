@@ -17,7 +17,7 @@
 <meta property="og:description" content="一、数据类型基本类型 byte/8、char/16、short/16、int/32、float/32、long/64、double/64、boolean boolean只有两个值（true/false），可以使用1bit来存储，但是通常没有明确规定大小。JVM会在编译时期将boolean类型的数据转换为int,使用1来表示true,0来表示false。JVM并不直接支持boolean数组，而是">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://assets.tianmaying.com/md-image/c887bccaa4b144622c82685097908f3d.png">
-<meta property="og:updated_time" content="2019-03-16T05:42:18.799Z">
+<meta property="og:updated_time" content="2019-03-16T10:45:16.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础篇">
 <meta name="twitter:description" content="一、数据类型基本类型 byte/8、char/16、short/16、int/32、float/32、long/64、double/64、boolean boolean只有两个值（true/false），可以使用1bit来存储，但是通常没有明确规定大小。JVM会在编译时期将boolean类型的数据转换为int,使用1来表示true,0来表示false。JVM并不直接支持boolean数组，而是">
@@ -320,27 +320,27 @@
 <li>在出现异常方法的调用者中捕获并处理立场。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyException</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> detail;</span><br><span class="line">    MyException(<span class="keyword">int</span> a)&#123;</span><br><span class="line">        detail = a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"MyException ["</span>+ detail + <span class="string">"]"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestMyException</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">compute</span><span class="params">(<span class="keyword">int</span> a)</span> <span class="keyword">throws</span> MyException</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Called compute("</span> + a + <span class="string">")"</span>);</span><br><span class="line">        <span class="keyword">if</span>(a &gt; <span class="number">10</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> MyException(a);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"Normal exit!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            compute(<span class="number">1</span>);</span><br><span class="line">            compute(<span class="number">20</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(MyException me)&#123;</span><br><span class="line">            System.out.println(<span class="string">"Caught "</span> + me);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="八、范型"><a href="#八、范型" class="headerlink" title="八、范型"></a>八、范型</h2><p><strong>1.Java中范型是什么？使用范型的好处是什么？</strong></p>
+<h2 id="八、范型"><a href="#八、范型" class="headerlink" title="八、范型"></a>八、范型</h2><p>1.Java中范型是什么？使用范型的好处是什么？</p>
 <p>​    这是在各种Java泛型面试中，一开场你就会被问到的问题中的一个，主要集中在初级和中级面试中。那些拥有Java1.4或更早版本的开发背景的人都知道，在集合中存储对象并在使用前进行类型转换是多么的不方便。泛型防止了那种情况的发生。它提供了编译期的类型安全，确保你只能把正确类型的对象放入集合中，避免了在运行时出现ClassCastException。</p>
-<p><strong>2.Java的范型是如何工作的？什么是类型擦除？</strong></p>
-<p>​    这是一道更好的泛型面试题。泛型是通过类型擦除来实现的，编译器在编译时擦除了所有类型相关的信息，所以在运行时不存在任何类型相关的信息。例如List<string>在运行时仅用一个List来表示。这样做的目的，是确保能和Java 5之前的版本开发二进制类库进行兼容。你无法在运行时访问到类型参数，因为编译器已经把泛型类型转换成了原始类型。根据你对这个泛型问题的回答情况，你会得到一些后续提问，比如为什么泛型是由类型擦除来实现的或者给你展示一些会导致编译器出错的错误泛型代码。请阅读我的Java中泛型是如何工作的来了解更多信息。</string></p>
-<p><strong>3.什么是范型中先顶的通配符和非先顶通配符？</strong></p>
-<p>​    这是另一个非常流行的Java泛型面试题。限定通配符对类型进行了限制。有两种限定通配符，一种是&lt;? extends T&gt;它通过确保类型必须是T的子类来设定类型的上界，另一种是&lt;? super T&gt;它通过确保类型必须是T的父类来设定类型的下界。泛型类型必须用限定内的类型来进行初始化，否则会导致编译错误。另一方面&lt;?&gt;表示了非限定通配符，因为&lt;?&gt;可以用任意类型来替代。更多信息请参阅我的文章泛型中限定通配符和非限定通配符之间的区别。</p>
-<p><strong>4.List&lt;? extends T&gt;和&lt;? super T&gt;之间有什么区别？</strong></p>
-<p>​    这和上一个面试题有联系，有时面试官会用这个问题来评估你对泛型的理解，而不是直接问你什么是限定通配符和非限定通配符。这两个List的声明都是限定通配符的例子，List&lt;? extends T&gt;可以接受任何继承自T的类型的List，而List&lt;? super T&gt;可以接受任何T的父类构成的List。例如List&lt;? extends Number&gt;可以接受List<integer>或List<float>。在本段出现的连接中可以找到更多信息。</float></integer></p>
-<p><strong>5.如何编写一个范型方法，让它能接受范型参数并返回范型类型？</strong></p>
+<p>2.Java的范型是如何工作的？什么是类型擦除？</p>
+<p>​    这是一道更好的泛型面试题。泛型是通过类型擦除来实现的，编译器在编译时擦除了所有类型相关的信息，所以在运行时不存在任何类型相关的信息。例如List<string>在运行时仅用一个List来表示。这样做的目的，是确保能和Java 5之前的版本开发二进制类库进行兼容。你无法在运行时访问到类型参数，因为编译器已经把泛型类型转换成了原始类型。根据你对这个泛型问题的回答情况，你会得到一些后续提问，比如为什么泛型是由类型擦除来实现的或者给你展示一些会导致编译器出错的错误泛型代码。</string></p>
+<p>3.什么是范型中先顶的通配符和非先顶通配符？</p>
+<p>​    这是另一个非常流行的Java泛型面试题。限定通配符对类型进行了限制。有两种限定通配符，一种是&lt;? extends T&gt;它通过确保类型必须是T的子类来设定类型的上界，另一种是&lt;? super T&gt;它通过确保类型必须是T的父类来设定类型的下界。泛型类型必须用限定内的类型来进行初始化，否则会导致编译错误。另一方面&lt;?&gt;表示了非限定通配符，因为&lt;?&gt;可以用任意类型来替代。</p>
+<p>4.List&lt;? extends T&gt;和&lt;? super T&gt;之间有什么区别？</p>
+<p>​    这和上一个面试题有联系，有时面试官会用这个问题来评估你对泛型的理解，而不是直接问你什么是限定通配符和非限定通配符。这两个List的声明都是限定通配符的例子，List&lt;? extends T&gt;可以接受任何继承自T的类型的List，而List&lt;? super T&gt;可以接受任何T的父类构成的List。例如List&lt;? extends Number&gt;可以接受List<integer>或List<float>。</float></integer></p>
+<p>5.如何编写一个范型方法，让它能接受范型参数并返回范型类型？</p>
 <p>​    编写泛型方法并不困难，你需要用泛型类型来替代原始类型，比如使用T, E or K,V等被广泛认可的类型占位符。泛型方法的例子请参阅Java集合类框架。最简单的情况下，一个泛型方法可能会像这样:</p>
 <p>​      </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> cache.put(key, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>6.Java中如何使用范型编写带有参数的类？</strong></p>
+<p>6.Java中如何使用范型编写带有参数的类？</p>
 <p>​    这是上一道面试题的延伸。面试官可能会要求你用泛型编写一个类型安全的类，而不是编写一个泛型方法。关键仍然是使用泛型类型来代替原始类型，而且要使用JDK中采用的标准占位符。</p>
-<p><strong>7.编写一段范型程序实现LRU缓存？</strong></p>
-<p>​    对于喜欢Java编程的人来说这相当于是一次练习。给你个提示，LinkedHashMap可以用来实现固定大小的LRU缓存，当LRU缓存已经满了的时候，它会把最老的键值对移出缓存。LinkedHashMap提供了一个称为removeEldestEntry()的方法，该方法会被put()和putAll()调用来删除最老的键值对。当然，如果你已经编写了一个可运行的JUnit测试，你也可以随意编写你自己的实现代码。</p>
-<p><strong>8.你可以把List<string>传递给一个接受List<object>参数的方法吗？</object></string></strong></p>
+<p>7.编写一段范型程序实现LRU缓存？</p>
+<p>​    对于喜欢Java编程的人来说这相当于是一次练习。给你个提示，LinkedHashMap可以用来实现固定大小的LRU缓存，当LRU缓存已经满了的时候，它会把最老的键值对移出缓存。LinkedHashMap提供了一个称为removeEldestEntry()的方法，该方法会被put()和putAll()调用来删除最老的键值对。</p>
+<p>8.你可以把List<string>传递给一个接受List<object>参数的方法吗？</object></string></p>
 <p>​    对任何一个不太熟悉泛型的人来说，这个Java泛型题目看起来令人疑惑，因为乍看起来String是一种Object，所以List<string>应当可以用在需要List<object>的地方，但是事实并非如此。真这样做的话会导致编译错误。如果你再深一步考虑，你会发现Java这样做是有意义的，因为List<object>可以存储任何类型的对象包括String, Integer等等，而List<string>却只能用来存储Strings。　    </string></object></object></string></p>
-<p><strong>9.Array中可以使用范型吗？</strong></p>
+<p>9.Array中可以使用范型吗？</p>
 <p>​    这可能是Java泛型面试题中最简单的一个了，当然前提是你要知道Array事实上并不支持泛型，这也是为什么Joshua Bloch在Effective Java一书中建议使用List来代替Array，因为List可以提供编译期的类型安全保证，而Array却不能。    </p>
-<p><strong>10.如何阻止Java中类型为检查的警告？</strong></p>
+<p>10.如何阻止Java中类型为检查的警告？</p>
 <p>如果你把泛型和原始类型混合起来使用，例如下列代码，Java 5的javac编译器会产生类型未检查的警告　</p>
 <p>​     </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; rawList = <span class="keyword">new</span> ArrayList()</span><br></pre></td></tr></table></figure>
@@ -447,6 +447,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/03/16/容器/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          容器
+        
+      </div>
+    </a>
   
   
     <a href="/2019/03/13/我的第一篇博客文章/" id="article-nav-older" class="article-nav-link-wrap">
