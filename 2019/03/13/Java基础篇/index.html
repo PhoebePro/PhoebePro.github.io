@@ -17,7 +17,7 @@
 <meta property="og:description" content="一、数据类型基本类型 byte/8、char/16、short/16、int/32、float/32、long/64、double/64、boolean boolean只有两个值（true/false），可以使用1bit来存储，但是通常没有明确规定大小。JVM会在编译时期将boolean类型的数据转换为int,使用1来表示true,0来表示false。JVM并不直接支持boolean数组，而是">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://assets.tianmaying.com/md-image/c887bccaa4b144622c82685097908f3d.png">
-<meta property="og:updated_time" content="2019-03-16T10:45:16.419Z">
+<meta property="og:updated_time" content="2019-03-18T03:12:21.299Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础篇">
 <meta name="twitter:description" content="一、数据类型基本类型 byte/8、char/16、short/16、int/32、float/32、long/64、double/64、boolean boolean只有两个值（true/false），可以使用1bit来存储，但是通常没有明确规定大小。JVM会在编译时期将boolean类型的数据转换为int,使用1来表示true,0来表示false。JVM并不直接支持boolean数组，而是">
@@ -168,6 +168,7 @@
 </li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer test = <span class="keyword">null</span>;</span><br><span class="line">   <span class="keyword">int</span> f = test.intValue();</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="二、String"><a href="#二、String" class="headerlink" title="二、String"></a>二、String</h3><ul>
 <li><p>String被声明为final,因此不可被继承。在Java 8中，String内部使用char数组来存储数据，在Java 9之后，改用byte数组来存储字符串，同时使用coder来标识使用了哪种编码。value数组被声明为final,这意味着value数组初始化之后就不能再引用其他数组。并且String内部没有改变value数组的方法，因此保证了String不可变。</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span></span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span>, <span class="title">Comparable</span>&lt;<span class="title">String</span>&gt;, <span class="title">CharSequence</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** The value is used for character storage. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">byte</span>[] value;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** The identifier of the encoding used to encode the bytes in &#123;<span class="doctag">@code</span> value&#125;. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">byte</span> coder;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

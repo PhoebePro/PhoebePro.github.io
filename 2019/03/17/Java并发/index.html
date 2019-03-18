@@ -8,22 +8,22 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Java并发 | 马福亮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、线程状态切换新建（new）创建后尚未启动。 可运行（runnable）可能正在运行，也可能在等待CPU时间片。 包含了操作系统线程状态中的running和ready。 阻塞（blocking）等待获取一个排它锁，如果其线程释放了锁就会结束此状态。 无限期等待（waiting）等待其他线程现式地唤醒，否则不会被分配CPU时间片。    进入方法 退出方法     没有设置Timeout参数的O">
+  <meta name="description" content="一、线程状态切换">
 <meta name="keywords" content="学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java并发">
 <meta property="og:url" content="http://yoursite.com/2019/03/17/Java并发/index.html">
 <meta property="og:site_name" content="马福亮的博客">
-<meta property="og:description" content="一、线程状态切换新建（new）创建后尚未启动。 可运行（runnable）可能正在运行，也可能在等待CPU时间片。 包含了操作系统线程状态中的running和ready。 阻塞（blocking）等待获取一个排它锁，如果其线程释放了锁就会结束此状态。 无限期等待（waiting）等待其他线程现式地唤醒，否则不会被分配CPU时间片。    进入方法 退出方法     没有设置Timeout参数的O">
+<meta property="og:description" content="一、线程状态切换">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://cyc2018.github.io/CS-Notes/pics/96706658-b3f8-4f32-8eb3-dcb7fc8d5381.jpg">
 <meta property="og:image" content="https://cyc2018.github.io/CS-Notes/pics/912a7886-fb1d-4a05-902d-ab17ea17007f.jpg">
 <meta property="og:image" content="https://cyc2018.github.io/CS-Notes/pics/f944fac3-482b-4ca3-9447-17aec4a3cca0.png">
 <meta property="og:image" content="https://cyc2018.github.io/CS-Notes/pics/e19452dd-220a-4a6b-bcb0-91ad5e5c4706.png">
-<meta property="og:updated_time" content="2019-03-17T15:59:42.250Z">
+<meta property="og:updated_time" content="2019-03-18T03:13:47.026Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发">
-<meta name="twitter:description" content="一、线程状态切换新建（new）创建后尚未启动。 可运行（runnable）可能正在运行，也可能在等待CPU时间片。 包含了操作系统线程状态中的running和ready。 阻塞（blocking）等待获取一个排它锁，如果其线程释放了锁就会结束此状态。 无限期等待（waiting）等待其他线程现式地唤醒，否则不会被分配CPU时间片。    进入方法 退出方法     没有设置Timeout参数的O">
+<meta name="twitter:description" content="一、线程状态切换">
 <meta name="twitter:image" content="https://cyc2018.github.io/CS-Notes/pics/96706658-b3f8-4f32-8eb3-dcb7fc8d5381.jpg">
   
     <link rel="alternative" href="/atom.xml" title="马福亮的博客" type="application/atom+xml">
@@ -158,8 +158,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="https://cyc2018.github.io/CS-Notes/pics/96706658-b3f8-4f32-8eb3-dcb7fc8d5381.jpg" alt="img"></p>
-<h2 id="一、线程状态切换"><a href="#一、线程状态切换" class="headerlink" title="一、线程状态切换"></a>一、线程状态切换</h2><h3 id="新建（new）"><a href="#新建（new）" class="headerlink" title="新建（new）"></a>新建（new）</h3><p>创建后尚未启动。</p>
+        <h2 id="一、线程状态切换"><a href="#一、线程状态切换" class="headerlink" title="一、线程状态切换"></a>一、线程状态切换</h2><a id="more"></a>
+<p><img src="https://cyc2018.github.io/CS-Notes/pics/96706658-b3f8-4f32-8eb3-dcb7fc8d5381.jpg" alt="img"></p>
+<h3 id="新建（new）"><a href="#新建（new）" class="headerlink" title="新建（new）"></a>新建（new）</h3><p>创建后尚未启动。</p>
 <h3 id="可运行（runnable）"><a href="#可运行（runnable）" class="headerlink" title="可运行（runnable）"></a>可运行（runnable）</h3><p>可能正在运行，也可能在等待CPU时间片。</p>
 <p>包含了操作系统线程状态中的running和ready。</p>
 <h3 id="阻塞（blocking）"><a href="#阻塞（blocking）" class="headerlink" title="阻塞（blocking）"></a>阻塞（blocking）</h3><p>等待获取一个排它锁，如果其线程释放了锁就会结束此状态。</p>
